@@ -1,10 +1,10 @@
 
 
 // 加载依赖
-require('./style.less');
-require('../dep/BirdGeometry');
+
 var THREE = require('../dep/three.min');
 var GPUComputationRenderer = require('../dep/GPUComputationRenderer');
+var BirdGeometry = require('../dep/BirdGeometry');
 window.THREE = THREE;
 
 
@@ -24,6 +24,10 @@ var positionUniforms, velocityUniforms, birdUniforms, gpuCompute, positionVariab
 var renderer, scene, camera, container;
 
 
+// 删除loading
+document.body.removeChild(document.getElementById('loading'));
+
+
 // 支持检测
 var support = (function () {
     try {
@@ -31,11 +35,13 @@ var support = (function () {
         return !!(
             window.WebGLRenderingContext
             && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
-       );
+        );
     } catch (e) {
         return false;
     }
 })();
+
+
 support && init();
 
 
@@ -104,7 +110,7 @@ function init() {
             fragmentShader: require('../dep/birdFS'),
             side: THREE.DoubleSide
         })
-   );
+    );
     birdMesh.rotation.y = Math.PI / 2;
     birdMesh.matrixAutoUpdate = false;
     birdMesh.updateMatrix();
@@ -151,8 +157,6 @@ function animate() {
 function onWindowResize() {
     WINDOW_WIDTH = document.documentElement.clientWidth;
     WINDOW_HEIGHT = document.documentElement.clientHeight;
-    container.style.width = WINDOW_WIDTH + 'px';
-    container.style.height = WINDOW_HEIGHT + 'px';
     windowHalfX = WINDOW_WIDTH / 2;
     windowHalfY = WINDOW_HEIGHT / 2;
     camera.aspect = WINDOW_WIDTH / WINDOW_HEIGHT;
