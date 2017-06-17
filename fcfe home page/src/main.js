@@ -24,10 +24,6 @@ var positionUniforms, velocityUniforms, birdUniforms, gpuCompute, positionVariab
 var renderer, scene, camera, container;
 
 
-// 删除loading
-document.body.removeChild(document.getElementById('loading'));
-
-
 // 支持检测
 var support = (function () {
     try {
@@ -119,8 +115,9 @@ function init() {
     // 绑定事件
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
-    document.addEventListener('touchstart', onDocumentTouchStart, false);
-    document.addEventListener('touchmove', onDocumentTouchMove, false);
+    document.addEventListener('touchstart', onDocumentTouch, false);
+    document.addEventListener('touchmove', onDocumentTouch, false);
+    document.addEventListener('touchend', onDocumentTouch, false);
 
     // 开启渲染
     animate();
@@ -171,20 +168,10 @@ function onDocumentMouseMove(event) {
 }
 
 
-function onDocumentTouchStart(event) {
-    if (event.touches.length === 1) {
-        event.preventDefault();
+function onDocumentTouch(event) {
+    if (event.touches.length) {
         mouseX = event.touches[ 0 ].pageX - windowHalfX;
         mouseY = event.touches[ 0 ].pageY - windowHalfY;
-    }
-}
-
-
-function onDocumentTouchMove(event) {
-    if (event.touches.length === 1) {
-        event.preventDefault();
-        mouseX = event.touches[0].pageX - windowHalfX;
-        mouseY = event.touches[0].pageY - windowHalfY;
     }
 }
 
