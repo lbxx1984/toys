@@ -1,0 +1,46 @@
+var TcFrame=TcFrame||{};
+TcFrame.Progress=function(param){
+	this.initializate(param);
+	if(param&&param.value!=null){this.value=param.value;}
+	if(param&&param.display!=null){this.display=param.display;}
+	this.core=new TcFrame.UIComponent({x:0,y:0});
+	this.core.parent=this;
+	this.core.setStyles(TcFrame.Skin[this.type]['core']);
+	this.content.appendChild(this.core.content);
+}
+TcFrame.Progress.prototype=new TcFrame.UIComponent();
+TcFrame.Progress.prototype.type="TcFrame.Progress";
+TcFrame.Progress.prototype.display="horizontal";//horizontal横向vertical纵向
+TcFrame.Progress.prototype.core=null;
+TcFrame.Progress.prototype.value=50;
+TcFrame.Progress.prototype.setValue=function(num){
+	this.value=parseInt(num);	
+	if(this.display=="horizontal"){
+		this.core.height=this.height;
+		this.core.width=this.width*this.value/100;	
+	}else{
+		this.core.width=this.width;
+		this.core.height=this.height*this.value/100;
+		this.core.y=this.height-this.core.height;
+	}
+	this.core.render();
+}
+TcFrame.Progress.prototype.resize=function(){
+	if(this.display=="horizontal"){
+		if(this.width<this.height){
+			tmp=this.width;
+			this.width=this.height;
+			this.height=tmp;	
+		}
+	}else{
+		if(this.width>this.height){
+			tmp=this.width;
+			this.width=this.height;
+			this.height=tmp;	
+		}
+	}
+	this.calcBorder();
+	this.render();
+	this.dispatch('onResize',{target:this});
+	this.setValue(this.value);
+}

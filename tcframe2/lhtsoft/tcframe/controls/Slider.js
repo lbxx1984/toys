@@ -1,0 +1,213 @@
+var TcFrame=TcFrame||{};
+TcFrame.Slider=function(param){
+	this.initializate(param);
+	if(param&&param.display!=null){this.display=param.display;}
+	if(param&&param.max!=null){this.max=param.max;}
+	if(param&&param.min!=null){this.min=param.min;}
+	if(param&&param.value!=null){this.value=param.value;}
+	if(param&&param.step!=null){this.step=param.step;}
+	this.toBig=new TcFrame.Label({text:"+"});
+	this.toBig.setStyles(TcFrame.Skin[this.type]['changeButton']);
+	this.toBig.parent=this;
+	this.toSmall=new TcFrame.Label({text:"-"});
+	this.toSmall.setStyles(TcFrame.Skin[this.type]['changeButton']);
+	this.toSmall.parent=this;
+	this.line=new TcFrame.UIComponent();
+	this.line.setStyles(TcFrame.Skin[this.type]['dragButton']);
+	this.line.parent=this;
+	this.cutline=new TcFrame.UIComponent();
+	this.cutline.setStyles(TcFrame.Skin[this.type]['dragButton']);
+	this.cutline.parent=this;
+	this.button=new TcFrame.Label({text:""});
+	this.button.setStyles(TcFrame.Skin[this.type]['dragButton']);
+	this.button.parent=this;
+	this.label=new TcFrame.Label({width:40,height:15,text:""});
+	this.label.parentSL=this;
+	this.label.setStyles(TcFrame.Skin[this.type]['label']);
+	this.content.appendChild(this.toBig.content);
+	this.content.appendChild(this.toSmall.content);
+	this.content.appendChild(this.line.content);
+	this.content.appendChild(this.cutline.content);
+	this.content.appendChild(this.button.content);
+	this.timer=new TcFrame.Timer({delay:100,func:this.autoChange});
+	this.timer.parent=this;
+	this.setup();
+}
+TcFrame.Slider.prototype=new TcFrame.UIComponent();
+TcFrame.Slider.prototype.type="TcFrame.Slider";
+TcFrame.Slider.prototype.display="horizontal";//horizontal横向vertical纵向
+TcFrame.Slider.prototype.toBig=null;
+TcFrame.Slider.prototype.toSmall=null;
+TcFrame.Slider.prototype.line=null;
+TcFrame.Slider.prototype.cutline=null;
+TcFrame.Slider.prototype.button=null;
+TcFrame.Slider.prototype.max=50;
+TcFrame.Slider.prototype.min=-50;
+TcFrame.Slider.prototype.step=2;
+TcFrame.Slider.prototype.value=0;
+TcFrame.Slider.prototype.timer=null;
+TcFrame.Slider.prototype.label=null;
+TcFrame.Slider.prototype.changeDirection=1;
+TcFrame.Slider.prototype.autoChange=function(event){
+	var sd=event.target.parent;
+	sd.value+=sd.changeDirection*sd.step;
+	if(sd.value>sd.max){sd.value=sd.max;sd.timer.stop();}
+	if(sd.value<sd.min){sd.value=sd.min;sd.timer.stop();}
+	sd.setValue(sd.value);
+}
+TcFrame.Slider.prototype.setup=function(){
+	this.toBig.addEventListener('onMouseOver',this.btnMouseOver);
+	this.toSmall.addEventListener('onMouseOver',this.btnMouseOver);
+	this.button.addEventListener('onMouseOver',this.btnMouseOver);
+	this.toBig.addEventListener('onMouseOut',this.btnMouseOut);
+	this.toSmall.addEventListener('onMouseOut',this.btnMouseOut);
+	this.button.addEventListener('onMouseOut',this.btnMouseOut);
+	this.toBig.addEventListener('onMouseDown',this.btnMouseDown);
+	this.toSmall.addEventListener('onMouseDown',this.btnMouseDown);
+	this.button.addEventListener('onMouseDown',this.btnMouseDown);
+	this.toBig.addEventListener('onMouseUp',this.btnMouseUp);
+	this.toSmall.addEventListener('onMouseUp',this.btnMouseUp);
+	this.button.addEventListener('onMouseUp',this.btnMouseUp);
+	this.addEventListener('onChange',this.onChange);
+}
+TcFrame.Slider.prototype.onChange=function(event){
+	var sl=event.target;
+	var str=sl.value+"";
+	if(str.length>6){str=str.substr(0,6);}
+	sl.label.setLabel(str);
+	var pos=sl.button.MousePositionCompareWithLocal();
+	pos[0]=TcFrame.MousePosition[0]-pos[0];
+	pos[1]=TcFrame.MousePosition[1]-pos[1];
+	if(sl.display=="horizontal"){
+		sl.label.y=pos[1]-sl.height-5;
+		sl.label.x=pos[0]-(sl.label.width-sl.button.width)/2;
+	}else{
+		sl.label.y=pos[1]-(sl.label.height-sl.button.height)/2;
+		sl.label.x=pos[0]-sl.label.width-5;	
+	}
+	if(sl.label.added){sl.label.resize();return;}
+	TcFrame.Boot.add(sl.label);
+	sl.label.added=true;
+	setTimeout(function(){
+		sl.label.parent.remove(sl.label);
+		sl.label.added=false;	
+	},1000);	
+}
+TcFrame.Slider.prototype.btnMouseOver=function(event){
+	var skin=TcFrame.Skin['TcFrame.Slider']['changeButtonOver'];
+	if(event.target==event.target.parent.button){
+		skin=TcFrame.Skin['TcFrame.Slider']['dragButtonOver'];	
+	}
+	event.target.setStyles(skin);	
+}
+TcFrame.Slider.prototype.btnMouseOut=function(event){
+	var skin=TcFrame.Skin['TcFrame.Slider']['changeButton'];
+	if(event.target==event.target.parent.button){
+		skin=TcFrame.Skin['TcFrame.Slider']['dragButton'];	
+	}
+	event.target.setStyles(skin);	
+}
+TcFrame.Slider.prototype.btnMouseDown=function(event){
+	var skin=TcFrame.Skin['TcFrame.Slider']['changeButtonDown'];
+	if(event.target==event.target.parent.button){
+		skin=TcFrame.Skin['TcFrame.Slider']['dragButtonDown'];
+		TcFrame.Drag.activeSlider=event.target.parent;
+		event.target.parent.onChange({target:event.target.parent});	
+	}
+	event.target.setStyles(skin);
+	if(event.target==event.target.parent.toBig){
+		event.target.parent.changeDirection=1;
+		event.target.parent.timer.start();	
+	}else if(event.target==event.target.parent.toSmall){
+		event.target.parent.changeDirection=-1;
+		event.target.parent.timer.start();
+	}
+}
+TcFrame.Slider.prototype.btnMouseUp=function(event){
+	event.target.parent.timer.stop();
+	var skin=TcFrame.Skin['TcFrame.Slider']['changeButtonOver'];
+	if(event.target==event.target.parent.button){skin=TcFrame.Skin['TcFrame.Slider']['dragButtonOver'];}
+	event.target.setStyles(skin);
+	if(event.target==event.target.parent.toBig||event.target==event.target.parent.toSmall){
+		event.target.parent.autoChange({target:event.target});
+	}
+}
+TcFrame.Slider.prototype.btnMove=function(arr){
+	if(this.display=="horizontal"){
+		this.button.x+=arr[0];
+		if(this.button.x>this.width-this.height-3){this.button.x=this.width-this.height-3;}
+		if(this.button.x<this.height-2){this.button.x=this.height-2;}
+		this.value=this.min+(this.max-this.min)*(this.button.x-this.height+2)/(this.width-this.height*2-1);
+	}else{
+		this.button.y+=arr[1];
+		if(this.button.y<this.width-1){this.button.y=this.width-1;}
+		if(this.button.y>this.height-this.width-2){this.button.y=this.height-this.width-2;}	
+		this.value=this.min+(this.max-this.min)*(this.height-this.width-2-this.button.y)/(this.height-this.width*2-1);
+	}
+	this.button.resize();
+	this.dispatch('onChange',{target:this});
+}
+TcFrame.Slider.prototype.setValue=function(num,notdispatch){
+	this.value=num;
+	if(this.display=="horizontal"){
+		this.button.x=this.height-2+(this.value-this.min)*(this.width-this.height*2-1)/(this.max-this.min)	
+	}else{
+		this.button.y=this.height-this.width-2-(this.value-this.min)*(this.height-this.width*2-1)/(this.max-this.min);
+	}
+	this.button.resize();
+	if(notdispatch){return;}
+	this.dispatch('onChange',{target:this});
+}
+TcFrame.Slider.prototype.resize=function(){
+	if(this.display=="horizontal"){
+		if(this.height>this.width){var tmp=this.width;this.width=this.height;this.height=tmp;}
+	}else{
+		if(this.height<this.width){var tmp=this.width;this.width=this.height;this.height=tmp;}
+	}
+	this.calcBorder();
+	this.render();
+	this.dispatch('onResize',{target:this});
+	if(this.display=="horizontal"){
+		this.toBig.right=this.toBig.top=0;
+		this.toBig.width=this.toBig.height=this.height;
+		this.toBig.content.style.lineHeight=this.height+"px";
+		this.toSmall.left=this.toSmall.top=0;
+		this.toSmall.width=this.toSmall.height=this.height;
+		this.toSmall.content.style.lineHeight=this.height+"px";
+		this.line.left=this.height+1;
+		this.line.right=this.height;
+		this.line.top=(this.height-2)/2-1;
+		this.line.height=2;
+		this.cutline.width=1;
+		this.cutline.height=this.height-4;
+		this.cutline.y=2;
+		this.cutline.x=this.width/2;
+		this.button.y=0;
+		this.button.width=5;
+		this.button.height=this.height;
+	}else{
+		this.toBig.left=this.toBig.top=0;
+		this.toBig.width=this.toBig.height=this.width;
+		this.toBig.content.style.lineHeight=this.width+"px";
+		this.toSmall.left=this.toSmall.bottom=0;
+		this.toSmall.width=this.toSmall.height=this.width;
+		this.toSmall.content.style.lineHeight=this.width+"px";
+		this.line.top=this.width+1;
+		this.line.bottom=this.width;
+		this.line.left=(this.width-2)/2-1;
+		this.line.width=2;
+		this.cutline.height=1;
+		this.cutline.width=this.width-4;
+		this.cutline.x=2;
+		this.cutline.y=this.height/2;
+		this.button.x=0;
+		this.button.y=(this.height-5)/2;
+		this.button.height=5;
+		this.button.width=this.width;
+	}
+	this.toSmall.resize();
+	this.toBig.resize();
+	this.line.resize();
+	this.cutline.resize();
+	this.setValue(this.value,1);
+}

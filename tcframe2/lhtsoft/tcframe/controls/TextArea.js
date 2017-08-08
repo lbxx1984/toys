@@ -1,0 +1,70 @@
+var TcFrame=TcFrame||{};
+TcFrame.TextArea=function(param){
+	this.initializate(param);
+	this.core=document.createElement("textarea");
+	this.core.parent=this;
+	this.core.style.cssText="position:absolute;border:0px;outline:none;resize:none;overflow:auto;";
+	this.content.appendChild(this.core);
+	var textarea=this.core;
+	var focusfunc=function(event){
+		textarea.parent.setStyles(textarea.parent.focusStyle);
+		textarea.parent.dispatch('onFocusIn',{target:textarea.parent});
+	}
+	var blurfunc=function(event){
+		if(TcFrame.RunInIE){
+			textarea.parent.value=textarea.parent.core.innerHTML;
+		}else{
+			textarea.parent.value=textarea.parent.core.value;
+		}
+		textarea.parent.setStyles(textarea.parent.normalStyle);
+		textarea.parent.dispatch('onFocusOut',{target:textarea.parent});
+		textarea.parent.dispatch('onChange',{target:textarea.parent});
+	}
+	try{this.core.addEventListener("focus",focusfunc,false);}catch(e){this.core.onfocus=focusfunc;}
+	try{this.core.addEventListener("blur",blurfunc,false);}catch(e){this.core.onblur=blurfunc;}
+	this.core.onkeyup=function(event){
+		if(TcFrame.RunInIE){
+			if(TcFrame.IEVersion<9){
+				textarea.parent.value=textarea.value;
+			}else{
+				textarea.parent.value=textarea.innerHTML;
+			}
+		}else{
+			textarea.parent.value=textarea.value;
+		}
+		textarea.parent.dispatch('onChange',{target:textarea.parent});
+	}
+	this.normalStyle=TcFrame.Skin['TcFrame.TextArea']['this'];
+	this.focusStyle=TcFrame.Skin['TcFrame.TextArea']['focus'];
+}
+TcFrame.TextArea.prototype=new TcFrame.UIComponent();
+TcFrame.TextArea.prototype.type="TcFrame.TextArea";
+TcFrame.TextArea.prototype.core=null;
+TcFrame.TextArea.prototype.value="";
+TcFrame.TextArea.prototype.normalStyle=null;
+TcFrame.TextArea.prototype.focusStyle=null;
+TcFrame.TextArea.prototype.setValue=function(str){
+	this.value=str;
+	if(TcFrame.RunInIE){
+		if(TcFrame.IEVersion<9){
+			this.core.value=this.value;
+		}else{
+			this.core.innerHTML=this.value;
+			this.value=this.core.innerHTML;
+			this.value=this.value.replace(/\n/g,"<br>");
+			this.core.innerHTML=this.value;
+		}
+	}else{
+		this.core.value=this.value;
+	}
+	this.dispatch('onChange',{target:this});	
+}
+TcFrame.TextArea.prototype.resize=function(){
+	this.calcBorder();
+	this.render();
+	var w=this.width,h=this.height;
+	if(TcFrame.RunInIE){w-=2;h-=2;}else{w-=4;h-=4;}
+	this.core.style.width=w+"px";
+	this.core.style.height=h+"px";
+	this.dispatch('onResize',{target:this});
+}

@@ -1,0 +1,123 @@
+var TcFrame=TcFrame||{};
+TcFrame.Button=function(param){
+	this.initializate(param);
+	this.styleNormal=TcFrame.Skin["TcFrame.Button"]["this"];
+	this.styleMouseOver=TcFrame.Skin["TcFrame.Button"]["mouseover"];
+	this.styleMouseDown=TcFrame.Skin["TcFrame.Button"]["mousedown"];
+	this.styleActive=TcFrame.Skin["TcFrame.Button"]["active"];
+	this.styleActiveTab=TcFrame.Skin["TcFrame.Button"]["activeTab"];
+	this.altLabel=new TcFrame.Label({width:param.altWidth||60,height:param.altHeight||20});
+	this.altLabel.setStyles(TcFrame.Skin["TcFrame.Button"]["altlabel"]);
+	if(param){
+		if(param.alt!=null){this.altLabel.setLabel(param.alt);}
+		if(param.label!=null){this.label=this.content.innerHTML=param.label;}else{this.content.innerHTML="buttton";}
+		if(param.altShow){this.showAlt=true;}
+		if(param.inTab){this.inTab=true;}
+		if(param.active){this.active=true;}
+		if(param.showBorder!=null){this.showBorder=param.showBorder;}
+	}
+	if(this.active){
+		if(this.inTab){
+			this.setStyles(this.styleActiveTab);
+		}else{
+			this.setStyles(this.styleActive);
+		}
+	}
+	if(!this.showBorder){
+		this.setStyle('border','1px solid '+this.styleNormal.backgroundColor);	
+	}
+}
+TcFrame.Button.prototype=new TcFrame.UIComponent();
+TcFrame.Button.prototype.type="TcFrame.Button";
+TcFrame.Button.prototype.label="";
+TcFrame.Button.prototype.altLabel=null;
+TcFrame.Button.prototype.styleNormal=null;
+TcFrame.Button.prototype.styleMouseOver=null;
+TcFrame.Button.prototype.styleMouseDown=null;
+TcFrame.Button.prototype.styleActive=null;
+TcFrame.Button.prototype.styleActiveTab=null;
+TcFrame.Button.prototype.inTab=false;
+TcFrame.Button.prototype.active=false;
+TcFrame.Button.prototype.showAlt=false;
+TcFrame.Button.prototype.mouseIn=false;
+TcFrame.Button.prototype.showBorder=true;
+TcFrame.Button.prototype.setActive=function(b){
+	this.active=b;
+	if(this.active){
+		if(this.inTab){
+			this.setStyles(this.styleActiveTab);
+		}else{
+			this.setStyles(this.styleActive);
+		}
+	}else{
+		this.setStyles(this.styleNormal);	
+	}
+}
+TcFrame.Button.prototype.setLabel=function(str){
+	this.label=this.content.innerHTML=str;
+}
+TcFrame.Button.prototype.setStyles=function(style){
+	if(!style){return}	
+	for(key in style){this.content.style[key]=style[key];}
+}
+TcFrame.Button.prototype.onMouseOver=function(){
+	this.parent.dispatch('onMouseOver',{target:this.parent});
+	this.parent.setStyles(this.parent.styleMouseOver);
+	this.parent.mouseIn=true;
+	var btn=this.parent;
+	if(btn.showAlt){
+		setTimeout(
+			function(){
+				if(btn.mouseIn){
+					var ma=btn.MousePositionCompareWithLocal();
+					btn.altLabel.x=TcFrame.MousePosition[0]+2;
+					btn.altLabel.y=TcFrame.MousePosition[1]+20;
+					TcFrame.Boot.add(btn.altLabel);
+					btn.altLabel.show=true;
+				}
+				setTimeout(
+					function(){
+						if(!btn.altLabel.show){return;}	
+						TcFrame.Boot.remove(btn.altLabel);
+						btn.altLabel.show=false;
+					}
+				,2000
+				);
+			},1500
+		);
+	}
+}
+TcFrame.Button.prototype.onMouseOut=function(){
+	if(this.parent.active){
+		if(this.parent.inTab){
+			this.parent.setStyles(this.parent.styleActiveTab);
+		}else{
+			this.parent.setStyles(this.parent.styleActive);
+		}
+	}else{
+		this.parent.setStyles(this.parent.styleNormal);
+	}
+	this.parent.mouseIn=false;
+	if(this.parent.altLabel.show){TcFrame.Boot.remove(this.parent.altLabel);this.parent.altLabel.show=false;}
+	if(!this.parent.showBorder){this.parent.setStyle('border','1px solid '+this.parent.styleNormal.backgroundColor);}
+	this.parent.dispatch('onMouseOut',{target:this.parent});
+}
+TcFrame.Button.prototype.onMouseMove=function(){
+	this.parent.dispatch('onMouseMove',{target:this.parent});
+}
+TcFrame.Button.prototype.onMouseDown=function(){
+	this.parent.dispatch('onMouseDown',{target:this.parent});
+	this.parent.setStyles(this.parent.styleMouseDown);
+}
+TcFrame.Button.prototype.onMouseUp=function(){
+	this.parent.dispatch('onMouseUp',{target:this.parent});
+	this.parent.setStyles(this.parent.styleMouseOver);
+}
+TcFrame.Button.prototype.onClick=function(){
+	this.parent.dispatch('onClick',{target:this.parent});
+}
+TcFrame.Button.prototype.resize=function(){
+	this.calcBorder();
+	this.render();
+	this.content.style.lineHeight=this.height+"px";
+}

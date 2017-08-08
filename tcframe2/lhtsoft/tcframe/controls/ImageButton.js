@@ -1,0 +1,67 @@
+var TcFrame=TcFrame||{};
+TcFrame.ImageButton=function(param){
+	this.initializate(param);
+	this.core=document.createElement("img");
+	this.core.style.cssText="position:absolute;";
+	this.content.appendChild(this.core);
+	if(param&&param.src!=null){this.src=param.src;}
+	if(param&&param.srcOver!=null){this.srcOver=param.srcOver;}else{this.srcOver=param.src;}
+	if(param&&param.srcDown!=null){this.srcDown=param.srcDown;}else{this.srcDown=param.src;}
+	if(param&&param.srcActive!=null){this.srcActive=param.srcActive;}else{this.srcActive=param.src;}
+	if(param&&param.active){this.active=true;}
+	this.addEventListener("onMouseOver",function(event){
+		event.target.core.src=event.target.srcOver;
+	});
+	this.addEventListener("onMouseDown",function(event){
+		event.target.core.src=event.target.srcDown;
+	});
+	this.addEventListener("onMouseUp",function(event){
+		event.target.core.src=event.target.srcOver;
+	});
+	this.addEventListener("onMouseOut",function(event){
+		if(event.target.active){
+			event.target.core.src=event.target.srcActive;
+		}else{
+			event.target.core.src=event.target.src;
+		}
+	});
+	this.source(this.src);
+}
+TcFrame.ImageButton.prototype=new TcFrame.UIComponent();
+TcFrame.ImageButton.prototype.type="TcFrame.ImageButton";
+TcFrame.ImageButton.prototype.src="";
+TcFrame.ImageButton.prototype.srcOver="";
+TcFrame.ImageButton.prototype.srcDown="";
+TcFrame.ImageButton.prototype.srcActive="";
+TcFrame.ImageButton.prototype.active=false;
+TcFrame.ImageButton.prototype.core=null;
+TcFrame.ImageButton.prototype.setSources=function(param){
+	if(param&&param.src!=null){this.src=param.src;}
+	if(param&&param.srcOver!=null){this.srcOver=param.srcOver;}else{this.srcOver=param.src;}
+	if(param&&param.srcDown!=null){this.srcDown=param.srcDown;}else{this.srcDown=param.src;}
+	if(param&&param.srcActive!=null){this.srcActive=param.srcActive;}else{this.srcActive=param.src;}	
+}
+TcFrame.ImageButton.prototype.setActive=function(b){
+	this.active=b;
+	if(this.active){
+		this.core.src=this.srcActive;
+	}else{
+		this.core.src=this.src;
+	}
+}
+TcFrame.ImageButton.prototype.source=function(url){
+	this.src=url;
+	this.core.src=this.src;
+	if(this.active){
+		this.core.src=this.srcActive;
+	}else{
+		this.core.src=this.src;
+	}
+}
+TcFrame.ImageButton.prototype.resize=function(){
+	this.calcBorder();
+	this.render();
+	this.core.style.width=this.width+"px";
+	this.core.style.height=this.height+"px";
+	this.dispatch('onResize',{target:this});
+}
