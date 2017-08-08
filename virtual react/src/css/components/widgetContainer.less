@@ -1,0 +1,38 @@
+.widget-container {
+    .list-normal-item-selected {
+        background-color: @blue-bg !important;
+        color: #FFF !important;
+    }
+    hr {
+        margin: 0;
+    }
+    .widget-item {
+        height: 40px;
+        line-height: 40px;
+        >span {
+            margin-left: 35px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        &:hover {
+            background-color: @hover-bg;
+        }
+    }
+    .selected {
+        background-color: rgba(69,147,255,0.6);
+        >span {
+            color: #FFF;
+        }
+        .fcui2-tip {
+            color: #FFF;
+        }
+        &:hover {
+            >span {
+                color: #000 !important;
+            }
+            .fcui2-tip {
+                color: grey !important;
+            }
+        }
+    }
+}

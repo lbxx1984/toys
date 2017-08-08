@@ -1,0 +1,32 @@
+@import "../../dep/fcui2/src/css/main";
+@import "../../dep/fcui2/src/css/icon/fc-icon";
+@import "./iconfont/iconfont";
+
+
+@normal-border: 1px solid #D4D4D4;
+@blue-bg: #4593FF;
+@hover-bg: #E5E5E5;
+
+
+@import './components/topNavigator';
+@import './components/fileTagsContainer';
+@import './components/toolContainer';
+@import './components/stageContainer';
+@import './components/sideBarContainer';
+@import './components/widgetContainer';
+
+body {
+    background-color: #F7F9FF;
+    margin: 0px;
+    overflow: hidden;
+    .tools-container-layer {
+        -moz-border-radius: 0px !important;
+        -webkit-border-radius: 0px !important;
+        border-radius: 0px !important;
+        -webkit-box-shadow: 0 0 0 !important;
+        -moz-box-shadow: 0 0 0 !important;
+        box-shadow:  0 0 0 !important;
+        border: 0 !important;
+        z-index: 9000 !important;
+    }
+}

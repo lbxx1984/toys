@@ -1,0 +1,57 @@
+.tool-container {
+    background-color: #FFF;
+    height: 95px;
+    border-left: @normal-border;
+    border-right: @normal-border;
+    border-bottom: @normal-border;
+    .panel {
+        position: relative;
+        background-color: #F7F9FF;
+        height: 68px;
+        display: inline-block;
+        border: @normal-border;
+        margin: 5px;
+        padding: 10px 10px 5px 0px;
+        .title {
+            display: block;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+        }
+        .ico {
+            display: inline-block;
+            color: rgba(0,0,0,0.5);
+            font-size: 30px;
+            background-color: #FFF;
+            width: 40px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin-left: 10px;
+            border: @normal-border;
+            border-radius: 5px;
+            cursor: pointer;
+            &:hover {
+                background-color: #4593FF;
+                color: #FFF;
+            }
+        }
+        .checked {
+            background-color: #4593FF;
+            color: #FFF;
+        }
+        .disabled {
+            background-color: #F1F1F1;
+            color: rgba(0,0,0,0.1);
+            cursor: default;
+            &:hover {
+                background-color: #F1F1F1;
+                color: rgba(0,0,0,0.1);
+            }
+        }
+    }
+}

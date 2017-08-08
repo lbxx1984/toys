@@ -1,0 +1,43 @@
+.stage-container {
+    position: fixed;
+    bottom: 0px;
+    overflow: scroll;
+    background-color: #F7f9FF;
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #DCDCDC;
+    }
+    canvas {
+        position: fixed;
+        border: @normal-border;
+    }
+    .stage {
+        position: absolute;
+        background-color: #FFF;
+        -webkit-box-shadow: 0 0 10px #C8C8C8;
+        -moz-box-shadow: 0 0 10px #C8C8C8;
+        box-shadow: 0 0 10px #C8C8C8;
+        overflow: hidden;
+        iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 0px;
+        }
+    }
+    .ruler-mask {
+        position: fixed;
+        width: 40px;
+        height: 36px;
+        border-bottom: @normal-border;
+        background-color: #FFF;
+        text-align: center;
+        font-size: 24px;
+        line-height: 37px;
+        color: rgba(0,0,0,0.5);
+    }
+}

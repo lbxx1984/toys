@@ -1,0 +1,13 @@
+{
+    "name": "FcIDE",
+    "version": "0.0.1",
+    "description": "FcIDE",
+    "dependencies": {
+        "edp": ">=0.0.0",
+        "edp-webserver": "1.2.3",
+        "edp-build": "1.1.1"
+    },
+    "author": "lbxxlht@163.com",
+    "license": "MIT",
+    "readme": "README"
+}

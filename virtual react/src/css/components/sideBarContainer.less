@@ -1,0 +1,34 @@
+.side-bar-container {
+    position: fixed;
+    bottom: 0px;
+    background-color: #F7F9FF;
+    z-index: 1;
+    .inner-container {
+        position: absolute;
+        top: 0px;
+        left: 5px;
+        right: 5px;
+        bottom: 0px;
+        border: @normal-border;
+        background-color: #FFF;
+        overflow-y: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+            background-color: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #DCDCDC;
+        }
+        .fcui2-tab {
+            border-bottom: 0;
+        }
+        .fcui2-tree {
+            .list-normal-item-selected {
+                background-color: @blue-bg;
+                color: #FFF;
+            }
+        }
+    }
+}

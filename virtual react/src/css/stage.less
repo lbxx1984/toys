@@ -1,0 +1,33 @@
+@import "../../dep/fcui2/src/css/main";
+@import "../../dep/fcui2/src/css/icon/fc-icon";
+* {
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select:none;
+    -khtml-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    cursor: default !important;
+}
+body {
+    margin: 0px;
+    .dragging-clips {
+        position: fixed;
+        opacity: 0.6;
+        border: 1px dashed #000;
+        z-index: 11000;
+    }
+    .fcui2-textbox {
+        background-color: #fff;
+    }
+    .sdk-selected, .sdk-selected * {
+        background-color: rgba(255,230,146,1) !important;
+    }
+    .sdk-hover, .sdk-hover * {
+        background-color: rgba(229,229,229,1) !important;
+    }
+    .sdk-hover-selected, .sdk-hover-selected * {
+        background-color: rgba(238,196,63,1) !important;
+    }
+}

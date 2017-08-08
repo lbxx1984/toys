@@ -1,0 +1,32 @@
+.file-tags-container {
+    position: fixed;
+    height: 35px;
+    background-color: #F7F9FF;
+    z-index: 1;
+    >div {
+        margin-top: 5px;
+        padding: 0 5px 0 15px;
+        display: inline-block;
+        line-height: 30px;
+        font-size: 12px;
+        cursor: pointer;
+        border-right: @normal-border;
+        border-top: @normal-border;
+        background-color: #FFF;
+        &:nth-child(1) {
+            border-left: @normal-border;
+        }
+        .font-icon-times {
+            position: relative;
+            top: 3px;
+            margin-left: 5px;
+            &:hover {
+                font-weight: 700;
+            }
+        }
+    }
+    .file-tag-current {
+        background-color: #4593FF;
+        color: #FFF;
+    }
+}

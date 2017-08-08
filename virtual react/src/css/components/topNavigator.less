@@ -1,0 +1,42 @@
+.tools-navigator {
+    position: fixed;
+    left: 5px;
+    right: 6px;
+    z-index: 1;
+    border: @normal-border;
+    height: 30px;
+    >div {
+        display: inline-block;
+        height: 30px;
+        padding: 0 10px;
+    }
+    .logo {
+        background-color: @blue-bg;
+        color: #FFF;
+        font-size: 14px;
+        font-weight: 700;
+        font-style: italic;
+        line-height: 30px;
+    }
+    .menu-item {
+        line-height: 25px;
+        height: 27px;
+        min-width: 60px;
+        text-align: center;
+        border-top: 3px solid #FFF;
+        border-right: @normal-border;
+        border-bottom: @normal-border;
+        background-color: #FFF;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .menu-item-active {
+        border-top: 3px solid @blue-bg;
+        border-bottom: 1px solid #FFF;
+    }
+    .menu-item-hover, .menu-item:hover {
+        background-color: @blue-bg;
+        color: #FFF;
+        border-top-color: @blue-bg;
+    }
+}
