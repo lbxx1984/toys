@@ -1,7 +1,7 @@
 <template>
     <div class="app">
         <div class="menu-bar">
-            <div class="title">VUE DEMO</div>
+            <h2>VUE DEMO</h2>
             <template v-for="(item, index) in modules">
                 <router-link :to="item.path" :key="index">{{index + 1 + '.' + item.label}}</router-link>
             </template>
@@ -39,12 +39,8 @@
             text-decoration: none;
             color: #000;
         }
-        .title {
-            line-height: 40px;
-            font-size: 24px;
+        h2 {
             text-align: center;
-            font-weight: 900;
-            border-bottom: 1px solid;
         }
         .router-link-active {
             background-color: rgba(0, 0, 0, 0.3);
