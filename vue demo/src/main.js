@@ -1,32 +1,25 @@
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import routes from './routingConfig';
 import App from './App.vue';
 
 Vue.use(VueRouter);
 
-const Foo = {
-    template: '<div>foo</div>'
-};
-const Bar = {
-    template: '<div>bar</div>'
-};
+const router = new VueRouter({routes});
 
-const routes = [
-    {
-        path: '/foo', component: Foo
-    },
-    {
-        path: '/bar', component: Bar
+const appProps = {
+    props: {
+        modules: routes.map(item => {
+            let {path, label} = item;
+            return {path, label}; 
+        }) 
     }
-];
+};
 
-const router = new VueRouter({
-    routes
-});
-
-const app = new Vue({
+new Vue({
     el: '#main',
     router,
-    render: h => h(App)
+    render: h => h(App, appProps)
 });
