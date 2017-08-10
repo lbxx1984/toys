@@ -35,7 +35,7 @@
         a {
             padding: 0 10px;
             display: block;
-            line-height: 30px;
+            line-height: 40px;
             text-decoration: none;
             color: #000;
         }
