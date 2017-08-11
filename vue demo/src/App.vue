@@ -3,7 +3,7 @@
         <div class="menu-bar">
             <h2>VUE DEMO</h2>
             <template v-for="(item, index) in modules">
-                <router-link :to="item.path" :key="index">{{index + 1 + '.' + item.label}}</router-link>
+                <router-link :to="item.path" :key="index" v-if="item.path !== '*'">{{index + 1 + '.' + item.label}}</router-link>
             </template>
         </div>
         <div class="main-container">

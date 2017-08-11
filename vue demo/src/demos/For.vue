@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2>For-If</h2>
+        <h2>v-for</h2>
         <hr/>
         <ul>
             <button @click="pushArr1">push</button>
@@ -8,7 +8,7 @@
             <li v-for="(item, index) in arr1" :style="{color: index % 2 === 0 ? 'green' : 'red'}">{{item}}</li>
         </ul>
         <ul>
-            <li v-for="(item, index) in arr1" v-if="index % 2 === 0">{{index + 1 + '-' + item}}</li>
+            <li v-for="(item, index) in arr1">{{index + 1 + '-' + item}}</li>
         </ul>
         <hr/>
         <ul>
