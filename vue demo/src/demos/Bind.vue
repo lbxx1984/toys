@@ -7,25 +7,23 @@
             <input :value="message" @input="onMessageInput"/><br/>
             <input v-model="message"/><br/>
         </p>
-        <p v-bind:title="title">绑定title</p>
-        <p v-bind="{class: borderClass, style: inlineCssText}">用对象字面量一次绑定多个属性</p>
-        <hr/>
-        <p :class="borderClass">绑定class</p>
-        <p :class="{'text-border': hasBorder, 'text-content': hasContent}">用对象语法绑定class</p>
-        <p :class="[borderClass, contentClass]">用数组语法绑定class</p>
-        <hr/>
-        <p :style="inlineCssText">用字符串绑定内联style</p>
-        <p :style="inlineCssObject">用对象绑定内联style</p>
-        <p :style="[inlineCssObject, inlineCssObject1]">用数组将多个对象绑定到内联style</p>
+        <p v-bind:title="title">Bind data on dom property.(mouse hover here)</p>
+        <p v-bind="{class: borderClass, style: inlineCssText}">Bind an object on dom properties.</p>
+        <p :class="borderClass">Bind data on class.</p>
+        <p :class="{'text-border': hasBorder, 'text-content': hasContent}">Bind an object on class</p>
+        <p :class="[borderClass, contentClass]">Bind an array on class</p>
+        <p :style="inlineCssText">Bind data on inline style.</p>
+        <p :style="inlineCssObject">Bind an object on inline style.</p>
+        <p :style="[inlineCssObject, inlineCssObject1]">Bind an array on inline style.</p>
     </div>
 </template>
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                message: '绑定到输入框',
-                title: '绑定到title属性',
+                message: 'Bind data on input box.',
+                title: 'This message will be seen only when you hover the dom.',
                 borderClass: 'text-border',
                 contentClass: 'text-content',
                 inlineCssText: 'color:red;',

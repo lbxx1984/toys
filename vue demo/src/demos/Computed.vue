@@ -1,28 +1,27 @@
 <template>
     <div class="container">
         <h2>computed</h2>
+        <hr/>
         <div>{{message}}</div>
         <div>{{reversedMessage}}</div>
-        <hr/>
         <div>{{arr}}</div>
         <div>{{computedArr}}</div>
         <div>{{computedArr2BaseOnArr}}</div>
-        <hr/>
-        <button @click="changeMessage">修改</button>
+        <button @click="changeMessage">random</button>
     </div>
 </template>
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                message: '这是一个正向的字符串',
+                message: '11542158454136854638979',
                 arr: []
             }
         },
         computed: {
             reversedMessage() {
-                return '计算过的逆序字符串：' + this.message.split('').reverse().join('');
+                return 'Computed data：' + this.message.split('').reverse().join('');
             },
             computedArr: {
                 set(value) {
@@ -45,7 +44,7 @@
         },
         methods: {
             changeMessage() {
-                let value = parseInt(Math.random() * 1000000000000, 10) + '';
+                let value = parseInt(Math.random() * 1000000000000000000, 10) + '';
                 this.message = value;
                 this.computedArr2BaseOnArr = value;
             }

@@ -2,21 +2,19 @@
     <div class="container">
         <h2>v-for</h2>
         <hr/>
+        <button @click="pushArr1">push</button>
+        <button @click="popArr1">pop</button>
         <ul>
-            <button @click="pushArr1">push</button>
-            <button @click="popArr1">pop</button>
             <li v-for="(item, index) in arr1" :style="{color: index % 2 === 0 ? 'green' : 'red'}">{{item}}</li>
         </ul>
         <ul>
             <li v-for="(item, index) in arr1">{{index + 1 + '-' + item}}</li>
         </ul>
-        <hr/>
+        <button @click="addObj1">add</button>
+        <button @click="deleteObj1">delete</button>
         <ul>
-            <button @click="addObj1">add</button>
-            <button @click="deleteObj1">delete</button>
             <li v-for="(value, key) in obj1">{{key + ' : ' + value}}</li>
         </ul>
-        <hr/>
         <button @click="addLeaf1">add</button>
         <button @click="deleteLeaf1">delete</button>
         <ul>
@@ -34,7 +32,7 @@
 
 <script>
     export default {
-        data () {
+        data() {
             return {
                 arr1: [
                     'line1', 'line2', 'line3', 'line4', 'line5'

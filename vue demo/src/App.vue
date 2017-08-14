@@ -2,6 +2,7 @@
     <div class="app">
         <div class="menu-bar">
             <h2>VUE DEMO</h2>
+            <hr/>
             <template v-for="(item, index) in modules">
                 <router-link :to="item.path" :key="index" v-if="item.path !== '*'">{{index + 1 + '.' + item.label}}</router-link>
             </template>

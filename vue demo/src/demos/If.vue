@@ -12,14 +12,14 @@
         </ul>
         <h5>v-if="(index + 1) % 3 !== 0"</h5>
         <ul>
-            <li v-for="(item, index) in arr" v-if="(index + 1) % 3 !== 0">{{index + ': ' + item}}</li>
+            <li v-for="(item, index) in arr" v-if="(index + 1) % 3 !== 0">{{index}}</li>
         </ul>
     </div>
 </template>
 
 <script>
     export default {
-        data () {
+        data() {
             return {
                 num: Math.random().toFixed(1),
                 arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

@@ -1,19 +1,22 @@
 
 export default [
     {
-        path: '/lifecycle', label: '生命周期', component: require('./demos/LifeCycle.vue')
+        path: '/lifecycle', label: 'Life Cycle', component: require('./demos/LifeCycle.vue')
     },
     {
-        path: '/bind', label: '数据绑定', component: require('./demos/Bind.vue')
+        path: '/bind', label: 'Bind', component: require('./demos/Bind.vue')
     },
     {
-        path: '/for', label: '循环', component: require('./demos/For.vue')
+        path: '/for', label: 'For', component: require('./demos/For.vue')
     },
     {
-        path: '/if', label: '条件', component: require('./demos/If.vue')
+        path: '/if', label: 'If', component: require('./demos/If.vue')
     },
     {
-        path: '/computed', label: '计算属性', component: require('./demos/Computed.vue')
+        path: '/computed', label: 'Computed', component: require('./demos/Computed.vue')
+    },
+    {
+        path: '/event', label: 'Event', component: require('./demos/Event.vue')
     },
     {
         path: '/bar', label: 'test', component: require('./demos/Test.vue')

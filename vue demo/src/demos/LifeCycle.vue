@@ -1,15 +1,16 @@
 <template>
     <div class="container">
         <h2>Life Cycle</h2>
-        <button @click="addCount">{{'count: ' + count}}</button>
+        <hr/>
         <div v-for="line in msg">{{line}}</div>
-        <h6>更多生命周期记录，看console</h6>
+        <button @click="addCount">{{'count: ' + count}}</button>
+        <h6>See more life cycle callback actions in console.</h6>
     </div>
 </template>
 
 <script>
     export default {
-        data () {
+        data() {
             return {
                 msg: [],
                 count: 0
