@@ -7,6 +7,7 @@
                 <router-link :to="item.path" :key="index" v-if="item.path !== '*'">{{index + 1 + '.' + item.label}}</router-link>
             </template>
         </div>
+        <textarea class="code-container">{{filename + '\n=======================================\n' + code}}</textarea>
         <div class="main-container">
             <router-view></router-view>
         </div>
@@ -14,11 +15,22 @@
 </template>
 
 <script>
+    import codeMap from './codeMap';
     export default {
         props: ['modules'],
         data () {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                codeMap: codeMap
+            }
+        },
+        computed: {
+            filename() {
+                let path = this.$route.path;
+                if (path.indexOf('/') !== 0) return '';
+                return path.replace('/', '').replace(/\b(\w)|\s(\w)/g, m => m.toUpperCase()) + '.vue';
+            },
+            code() {
+                return this.codeMap[this.filename] || '';
             }
         }
     }
@@ -48,7 +60,16 @@
             color: #FFF;
         }
     }
+    .code-container {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 800px;
+        border-left: 1px solid;
+    }
     .main-container {
         margin-left: 200px;
+        margin-right: 800px;
     }
 </style>

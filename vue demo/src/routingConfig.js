@@ -1,7 +1,7 @@
 
 export default [
     {
-        path: '/lifecycle', label: 'Life Cycle', component: require('./demos/LifeCycle.vue')
+        path: '/lifeCycle', label: 'Life Cycle', component: require('./demos/LifeCycle.vue')
     },
     {
         path: '/bind', label: 'Bind', component: require('./demos/Bind.vue')
@@ -19,9 +19,9 @@ export default [
         path: '/event', label: 'Event', component: require('./demos/Event.vue')
     },
     {
-        path: '/bar', label: 'test', component: require('./demos/Test.vue')
+        path: '/form', label: 'Form', component: require('./demos/Form.vue')
     },
     {
-        path: "*", redirect: '/lifecycle'
+        path: "*", redirect: '/lifeCycle'
     }
 ];
