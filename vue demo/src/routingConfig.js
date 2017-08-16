@@ -22,6 +22,9 @@ export default [
         path: '/form', label: 'Form', component: require('./demos/Form.vue')
     },
     {
+        path: '/component', label: 'Component', component: require('./demos/Component.vue')
+    },
+    {
         path: "*", redirect: '/lifeCycle'
     }
 ];

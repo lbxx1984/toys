@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2>Life Cycle</h2>
+        <h2>life cycle</h2>
         <hr/>
         <div v-for="line in msg">{{line}}</div>
         <button @click="addCount">{{'count: ' + count}}</button>
