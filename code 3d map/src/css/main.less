@@ -1,0 +1,34 @@
+@font-normal: 'Helvetica', 'Tahoma', 'Arial', 'Heiti SC', 'Microsoft YaHei', '微软雅黑', sans-serif;
+
+@import "colors";
+@import "../../dep/fcui2/src/css/main";
+@import "./icon/tc-icon";
+@import "./components/stage";
+@import "./components/cameraController";
+@import "./fcui2hacks";
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: @background-color-main;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: @background-color-main;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAAWdEVYdENyZWF0aW9uIFRpbWUAMTIvMTUvMTa/LrshAAAAKUlEQVQYlWP8//8/AwMDA8Pdu3chDDSgrKzMyMDAwMCETRIbGFVIHYUACYsHEco9/38AAAAASUVORK5CYII=);
+}
+.tc-root-container {
+    font-family: @font-normal;
+}
+.tc-camera-controller {
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
