@@ -19,18 +19,18 @@ define(function (require) {
             // 3D摄像机配置
             camera3D: {
                 // 摄像机到期观察点的距离，可以理解为焦距
-                cameraRadius: 2500,
+                cameraRadius: 2000,
                 // 摄像机视线与XOZ平面夹角
                 cameraAngleA: 40,
                 // 摄像机视线在XOZ平面投影与X轴夹角
-                cameraAngleB: 45,
+                cameraAngleB: 90,
                 // 摄像机观察点
                 lookAt: {x: 0, y: 0, z: 0}
             },
             // 舞台中网格是否显示
             gridVisible: true,
             // 舞台中3D网格大小
-            gridSize3D: 5000,
+            gridSize3D: 20000,
             // 舞台中3D网格单元格大小
             gridStep3D: 50
         },

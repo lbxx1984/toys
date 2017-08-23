@@ -13,6 +13,24 @@ define(function (require) {
 
     const CameraController = require('./CameraController.jsx');
     const animation = require('../core/animation');
+    const mapRenderer = require('../core/mapRenderer');
+    const LIGHT_DIST = 20000;
+
+    const lights = [
+        {x: 0, y: LIGHT_DIST, z: 0}
+        // {x: 0, y: -LIGHT_DIST, z: 0}
+        // {x: LIGHT_DIST, y: 0, z: 0},
+        // // {x: -LIGHT_DIST, y: 0, z: 0},
+        // {x: 0, y: 0, z: LIGHT_DIST}
+        // {x: 0, y: 0, z: -LIGHT_DIST}
+    ].map(function (pos) {
+        const light = new THREE.PointLight(0xffffff);
+        light.position.set(pos.x, pos.y, pos.z);
+        return light;
+    });
+
+
+
 
 
     // 渲染器工厂
@@ -43,6 +61,12 @@ define(function (require) {
         const y = cameraRadius * Math.sin(Math.PI * cameraAngleA / 180);
         const x = cameraRadius * Math.cos(Math.PI * cameraAngleA / 180) * Math.cos(Math.PI * cameraAngleB / 180);
         const z = cameraRadius * Math.cos(Math.PI * cameraAngleA / 180) * Math.sin(Math.PI * cameraAngleB / 180);
+        grid.position.set(props.cameraLookAt.x, props.cameraLookAt.y, props.cameraLookAt.z);
+        me.camera.position.set(
+            x + props.cameraLookAt.x,
+            y + props.cameraLookAt.y,
+            z + props.cameraLookAt.z
+        );
         if (Math.abs(cameraAngleA) < 2) {
             coordinateContainer.rotation.z = grid.rotation.z = Math.PI * 0.5 - Math.PI * cameraAngleB / 180;
             coordinateContainer.rotation.x = grid.rotation.x = Math.PI * 1.5;
@@ -51,11 +75,12 @@ define(function (require) {
             coordinateContainer.rotation.z = grid.rotation.z = 0;
             coordinateContainer.rotation.x = grid.rotation.x = 0;
         }
-        me.camera.position.set(
-            x + props.cameraLookAt.x,
-            y + props.cameraLookAt.y,
-            z + props.cameraLookAt.z
-        );
+        if (me.text3dHash instanceof Array) {
+            me.text3dHash.map(text => {
+                text.rotation.y = Math.PI * 0.5 - Math.PI * cameraAngleB / 180;
+                text.scale.x = text.scale.y = text.scale.z = cameraRadius / 2000; 
+            });
+        }
     }
 
     // 更新摄像机属性
@@ -85,20 +110,6 @@ define(function (require) {
             me.grid.visible = nextProps.gridVisible;
             me.axis.visible = nextProps.gridVisible;
         }
-    }
-
-    // 舞台技术测试
-    function test(me) {
-        // const renderer = me.renderer;
-        // const camera = me.camera;
-        // const scene = me.scene;
-        // const mshBox = new THREE.Mesh(
-        //     new THREE.SphereGeometry(20, 20, 20),
-        //     new THREE.MeshPhongMaterial({color: 0x4080ff})
-        // );
-        // mshBox.position.set(100, 0, 200);
-        // scene.add(mshBox);
-        // console.log(camera.rotation);
     }
 
 
@@ -165,8 +176,10 @@ define(function (require) {
             this.renderer = new THREE.WebGLRenderer({antialias: true});
 
             // 初始化舞台
-            this.scene.add(this.grid);
+            // this.scene.add(this.grid);
             this.scene.add(this.axis);
+            lights.map(light => this.scene.add(light));
+
             this.scene.add(this.coordinateContainer);
             this.grid.visible = this.props.gridVisible;
             this.axis.visible = this.props.gridVisible;
@@ -183,8 +196,8 @@ define(function (require) {
 
             // 开启渲染引擎
             animation.add('stage3d', animaterFactory(this));  
-            // 加载自定义对象
-            test(this);
+            // 加载地图
+            mapRenderer(this);
         },
 
         componentWillReceiveProps: function (nextProps) {
