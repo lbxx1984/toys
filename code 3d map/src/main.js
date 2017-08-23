@@ -70,5 +70,4 @@ define(function (require) {
         moveCameraByKeyboard('cameraAngleB', -1);
     });
 
-
 });

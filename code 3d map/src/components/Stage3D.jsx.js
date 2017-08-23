@@ -244,6 +244,7 @@ define(function (require) {
             this.context.dispatch('changeMouse3D', mouse3D);
             const callbackParam = {
                 event: e,
+                ctrlKey: e.nativeEvent.ctrlKey,
                 cameraInfo: {
                     radius: this.props.cameraRadius,
                     angleA: this.props.cameraAngleA,

@@ -38,6 +38,21 @@ define(function (require) {
         // 移动摄像机
         'camera-move': function (param, dragging) {
             if (!dragging) return;
+            // 旋转摄像机
+            if (param.ctrlKey) {
+                const stageInfo = JSON.parse(JSON.stringify(this.get('stage')));
+                const mouseDelta2D = param.mouseDelta2D;
+                const dB = Math.abs(mouseDelta2D.x) > 3 ? 3 * mouseDelta2D.x / Math.abs(mouseDelta2D.x) : 0;
+                const a = stageInfo.camera3D.cameraAngleA;
+                let dA = Math.abs(mouseDelta2D.y) > 3 ? 3 * mouseDelta2D.y / Math.abs(mouseDelta2D.y) : 0;
+                dA = a < 90 && a + dA > 90 ? 0 : dA;
+                dA = a > -90 && a + dA < -90 ? 0 : dA;
+                stageInfo.camera3D.cameraAngleA += dA;
+                stageInfo.camera3D.cameraAngleB += dB;
+                this.set('stage', stageInfo);
+                return;
+            }
+            // 平移摄像机
             let stage = param.stage3D;
             const angleB = stage.props.cameraAngleB;
             const speed = stage.props.cameraMoveSpeed;
