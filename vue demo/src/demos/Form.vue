@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <h2>form</h2>
+        <hr/>
         <div class="preview">
             <label>name:</label>{{name}}<span>{{validationName}}</span><br/>
             <label>sex:</label>{{sex}}<br/>

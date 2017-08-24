@@ -7,10 +7,8 @@ define(function (require) {
 
 
     const _ = require('underscore');
-    const Dialog = require('fcui2/Dialog.jsx');
     const hotkey = require('../core/hotkey');
     const math = require('../core/math');
-    const dialog = new Dialog();
 
 
     return {

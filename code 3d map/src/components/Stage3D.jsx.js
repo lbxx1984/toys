@@ -77,8 +77,7 @@ define(function (require) {
         }
         if (me.text3dHash instanceof Array) {
             me.text3dHash.map(text => {
-                text.rotation.y = Math.PI * 0.5 - Math.PI * cameraAngleB / 180;
-                text.scale.x = text.scale.y = text.scale.z = cameraRadius / 2000; 
+                text.scale.x = text.scale.y = text.scale.z = text.position.distanceTo(me.camera.position) / 2500; 
             });
         }
     }
@@ -215,7 +214,7 @@ define(function (require) {
             let r = this.props.cameraRadius - 0.2 * this.props.cameraRadius * evt.wheelDelta
                 * this.props.cameraMoveSpeed / this.refs.container.offsetWidth;
             r = Math.max(r, 50);
-            r = Math.min(r, 5000);
+            r = Math.min(r, 10000);
             this.context.dispatch('changeCamera3D', {cameraRadius: r});
             evt.stopPropagation();
             return false;
@@ -244,7 +243,7 @@ define(function (require) {
             this.context.dispatch('changeMouse3D', mouse3D);
             const callbackParam = {
                 event: e,
-                ctrlKey: e.nativeEvent.ctrlKey,
+                ctrlKey: e.nativeEvent.shiftKey,
                 cameraInfo: {
                     radius: this.props.cameraRadius,
                     angleA: this.props.cameraAngleA,

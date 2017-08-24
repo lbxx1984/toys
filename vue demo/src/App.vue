@@ -1,13 +1,16 @@
 <template>
     <div class="app">
         <div class="menu-bar">
-            <h2>VUE DEMO</h2>
+            <h2>
+                <img src="https://cn.vuejs.org/images/logo.png" style="width:30px;"/>
+                VUE DEMO
+            </h2>
             <hr/>
             <template v-for="(item, index) in modules">
                 <router-link :to="item.path" :key="index" v-if="item.path !== '*'">{{index + 1 + '.' + item.label}}</router-link>
             </template>
         </div>
-        <textarea class="code-container">{{filename + '\n=======================================\n' + code}}</textarea>
+        <textarea disabled class="code-container">{{filename + '\n=======================================\n' + code}}</textarea>
         <div class="main-container">
             <router-view></router-view>
         </div>
@@ -53,11 +56,14 @@
             color: #000;
         }
         h2 {
+            img {
+                position: relative;
+                top: 5px;
+            }
             text-align: center;
         }
         .router-link-active {
-            background-color: rgba(0, 0, 0, 0.3);
-            color: #FFF;
+            background-color: #EBEBE4;
         }
     }
     .code-container {
@@ -67,6 +73,7 @@
         bottom: 0;
         width: 800px;
         border-left: 1px solid;
+        background-color: #EBEBE4;
     }
     .main-container {
         margin-left: 200px;
