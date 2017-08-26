@@ -13,24 +13,7 @@ define(function (require) {
 
     const CameraController = require('./CameraController.jsx');
     const animation = require('../core/animation');
-    const mapRenderer = require('../core/mapRenderer');
-    const LIGHT_DIST = 20000;
-
-    const lights = [
-        {x: 0, y: LIGHT_DIST, z: 0}
-        // {x: 0, y: -LIGHT_DIST, z: 0}
-        // {x: LIGHT_DIST, y: 0, z: 0},
-        // // {x: -LIGHT_DIST, y: 0, z: 0},
-        // {x: 0, y: 0, z: LIGHT_DIST}
-        // {x: 0, y: 0, z: -LIGHT_DIST}
-    ].map(function (pos) {
-        const light = new THREE.PointLight(0xffffff);
-        light.position.set(pos.x, pos.y, pos.z);
-        return light;
-    });
-
-
-
+    const mapRenderer = require('../core/mapRenderer/index');
 
 
     // 渲染器工厂
@@ -74,11 +57,6 @@ define(function (require) {
         else {
             coordinateContainer.rotation.z = grid.rotation.z = 0;
             coordinateContainer.rotation.x = grid.rotation.x = 0;
-        }
-        if (me.text3dHash instanceof Array) {
-            me.text3dHash.map(text => {
-                text.scale.x = text.scale.y = text.scale.z = text.position.distanceTo(me.camera.position) / 2500; 
-            });
         }
     }
 
@@ -177,7 +155,6 @@ define(function (require) {
             // 初始化舞台
             // this.scene.add(this.grid);
             this.scene.add(this.axis);
-            lights.map(light => this.scene.add(light));
 
             this.scene.add(this.coordinateContainer);
             this.grid.visible = this.props.gridVisible;
