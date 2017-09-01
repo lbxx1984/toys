@@ -20,6 +20,9 @@ define(function (require) {
                 dispatch: this.props.dispatch
             };
         },
+        onStageClick: function () {
+            this.props.dispatch('onStageClick');
+        },
         render: function () {
             return (
                 <div className="tc-root-container">
@@ -32,7 +35,7 @@ define(function (require) {
 
     function stageFactory(me) {
         const cameraConfig = me.props.stage.camera3D;
-        const right = 0;
+        const right = 300;
         const stage3dProps = {
             tool: me.props.tool,
             cameraRadius: cameraConfig.cameraRadius,
@@ -45,7 +48,11 @@ define(function (require) {
             colorStage: me.props.stage.colorStage[1],
             colorGrid: me.props.stage.colorGrid[1]
         };
-        return (<Stage3D {...stage3dProps} style={{right: right}}/>);
+        return (
+            <div onClick={me.onStageClick}>
+                <Stage3D {...stage3dProps} style={{right: right}}/>
+            </div>
+        );
     }
 
 

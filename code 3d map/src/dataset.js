@@ -53,6 +53,10 @@ define(function (require) {
             "fullpath": "src/commonJSX/layer",
             "isDirectory": true
         },
+        "MassWordShow.jsx.js": {
+            "fullpath": "src/commonJSX/MassWordShow.jsx.js",
+            "isDirectory": false
+        },
         "OperationBar.jsx.js": {
             "fullpath": "src/commonJSX/OperationBar.jsx.js",
             "isDirectory": false
@@ -104,9 +108,17 @@ define(function (require) {
         "index.js": {
             "fullpath": "src/module/index.js",
             "isDirectory": false
+        },
+        "noApp": {
+            "fullpath": "src/module/noApp",
+            "isDirectory": true
         }
     },
     "src/service": {
+        "appAdsService": {
+            "fullpath": "src/service/appAdsService",
+            "isDirectory": true
+        },
         "getAppInfo.js": {
             "fullpath": "src/service/getAppInfo.js",
             "isDirectory": false
@@ -115,8 +127,20 @@ define(function (require) {
             "fullpath": "src/service/getAppList.js",
             "isDirectory": false
         },
-        "isAccountBindApp.js": {
-            "fullpath": "src/service/isAccountBindApp.js",
+        "getPlanList.js": {
+            "fullpath": "src/service/getPlanList.js",
+            "isDirectory": false
+        },
+        "getPlanStatus.js": {
+            "fullpath": "src/service/getPlanStatus.js",
+            "isDirectory": false
+        },
+        "getUnitsList.js": {
+            "fullpath": "src/service/getUnitsList.js",
+            "isDirectory": false
+        },
+        "getUnitsStatus.js": {
+            "fullpath": "src/service/getUnitsStatus.js",
             "isDirectory": false
         }
     },
@@ -139,6 +163,10 @@ define(function (require) {
     "src/commonJSX/renderer": {
         "TableFilterHeader.jsx.js": {
             "fullpath": "src/commonJSX/renderer/TableFilterHeader.jsx.js",
+            "isDirectory": false
+        },
+        "TableLinkRenderer.jsx.js": {
+            "fullpath": "src/commonJSX/renderer/TableLinkRenderer.jsx.js",
             "isDirectory": false
         }
     },
@@ -191,8 +219,36 @@ define(function (require) {
             "fullpath": "src/module/appManage/components",
             "isDirectory": true
         },
+        "config": {
+            "fullpath": "src/module/appManage/config",
+            "isDirectory": true
+        },
         "Model.js": {
             "fullpath": "src/module/appManage/Model.js",
+            "isDirectory": false
+        }
+    },
+    "src/module/noApp": {
+        "App.jsx.js": {
+            "fullpath": "src/module/noApp/App.jsx.js",
+            "isDirectory": false
+        },
+        "Model.js": {
+            "fullpath": "src/module/noApp/Model.js",
+            "isDirectory": false
+        }
+    },
+    "src/service/appAdsService": {
+        "getAppAdsList.js": {
+            "fullpath": "src/service/appAdsService/getAppAdsList.js",
+            "isDirectory": false
+        },
+        "getAppBindList.js": {
+            "fullpath": "src/service/appAdsService/getAppBindList.js",
+            "isDirectory": false
+        },
+        "getAppVersions.js": {
+            "fullpath": "src/service/appAdsService/getAppVersions.js",
             "isDirectory": false
         }
     },
@@ -205,18 +261,26 @@ define(function (require) {
             "fullpath": "src/module/addNormalTargeting/components/AppInfo.jsx.js",
             "isDirectory": false
         },
-        "AppOverPriceType.jsx.js": {
-            "fullpath": "src/module/addNormalTargeting/components/AppOverPriceType.jsx.js",
+        "DynamicOverPriceType.jsx.js": {
+            "fullpath": "src/module/addNormalTargeting/components/DynamicOverPriceType.jsx.js",
             "isDirectory": false
         },
         "renderer": {
             "fullpath": "src/module/addNormalTargeting/components/renderer",
             "isDirectory": true
+        },
+        "UnitTree.jsx.js": {
+            "fullpath": "src/module/addNormalTargeting/components/UnitTree.jsx.js",
+            "isDirectory": false
         }
     },
     "src/module/addNormalTargeting/config": {
         "appInfoTableConfig.js": {
             "fullpath": "src/module/addNormalTargeting/config/appInfoTableConfig.js",
+            "isDirectory": false
+        },
+        "mainConfig.js": {
+            "fullpath": "src/module/addNormalTargeting/config/mainConfig.js",
             "isDirectory": false
         }
     },
@@ -272,6 +336,12 @@ define(function (require) {
             "isDirectory": true
         }
     },
+    "src/module/appManage/config": {
+        "mainConfig.js": {
+            "fullpath": "src/module/appManage/config/mainConfig.js",
+            "isDirectory": false
+        }
+    },
     "src/module/addNormalTargeting/components/renderer": {
         "AppIconRenderer.jsx.js": {
             "fullpath": "src/module/addNormalTargeting/components/renderer/AppIconRenderer.jsx.js",
@@ -315,15 +385,22 @@ define(function (require) {
         "deps": [
             "src/core/ajax.js",
             "src/core/util.js",
+            "src/service/appAdsService/getAppVersions.js",
             "src/module/index.js"
         ]
     },
     "src/core/ajax.js": {
         "quoter": [
             "src/main.js",
+            "src/service/appAdsService/getAppVersions.js",
+            "src/service/appAdsService/getAppAdsList.js",
+            "src/service/appAdsService/getAppBindList.js",
             "src/service/getAppList.js",
-            "src/service/isAccountBindApp.js",
-            "src/service/getAppInfo.js"
+            "src/service/getAppInfo.js",
+            "src/service/getPlanList.js",
+            "src/service/getUnitsList.js",
+            "src/service/getPlanStatus.js",
+            "src/service/getUnitsStatus.js"
         ],
         "deps": []
     },
@@ -333,9 +410,20 @@ define(function (require) {
             "src/module/adManage/Model.js",
             "src/module/adManage/Main.jsx.js",
             "src/module/appManage/Model.js",
-            "src/commonJSX/Header.jsx.js"
+            "src/module/addNormalTargeting/Model.js",
+            "src/commonJSX/Header.jsx.js",
+            "src/module/adManage/config/normalTargetingOperationBarConfig.js"
         ],
         "deps": []
+    },
+    "src/service/appAdsService/getAppVersions.js": {
+        "quoter": [
+            "src/main.js",
+            "src/module/adManage/Model.js"
+        ],
+        "deps": [
+            "src/core/ajax.js"
+        ]
     },
     "src/module/index.js": {
         "quoter": [
@@ -347,7 +435,9 @@ define(function (require) {
             "src/module/appManage/Model.js",
             "src/module/appManage/App.jsx.js",
             "src/module/addNormalTargeting/Model.js",
-            "src/module/addNormalTargeting/App.jsx.js"
+            "src/module/addNormalTargeting/App.jsx.js",
+            "src/module/noApp/Model.js",
+            "src/module/noApp/App.jsx.js"
         ]
     },
     "src/module/adManage/Model.js": {
@@ -357,6 +447,9 @@ define(function (require) {
         "deps": [
             "src/core/Model.js",
             "src/core/util.js",
+            "src/service/appAdsService/getAppVersions.js",
+            "src/service/appAdsService/getAppAdsList.js",
+            "src/service/appAdsService/getAppBindList.js",
             "src/module/adManage/config/mainConfig.js"
         ]
     },
@@ -381,7 +474,6 @@ define(function (require) {
             "src/core/Model.js",
             "src/core/util.js",
             "src/service/getAppList.js",
-            "src/service/isAccountBindApp.js",
             "src/commonConfig/appStateDialogConfig.js"
         ]
     },
@@ -401,7 +493,12 @@ define(function (require) {
         ],
         "deps": [
             "src/core/Model.js",
-            "src/service/getAppInfo.js"
+            "src/service/getAppInfo.js",
+            "src/service/getPlanList.js",
+            "src/service/getUnitsList.js",
+            "src/service/getPlanStatus.js",
+            "src/service/getUnitsStatus.js",
+            "src/core/util.js"
         ]
     },
     "src/module/addNormalTargeting/App.jsx.js": {
@@ -413,21 +510,57 @@ define(function (require) {
             "src/commonJSX/Header.jsx.js",
             "src/module/addNormalTargeting/components/AppInfo.jsx.js",
             "src/module/addNormalTargeting/components/AppBindLayer.jsx.js",
-            "src/module/addNormalTargeting/components/AppOverPriceType.jsx.js"
+            "src/module/addNormalTargeting/components/DynamicOverPriceType.jsx.js"
+        ]
+    },
+    "src/module/noApp/Model.js": {
+        "quoter": [
+            "src/module/index.js"
+        ],
+        "deps": [
+            "src/core/Model.js"
+        ]
+    },
+    "src/module/noApp/App.jsx.js": {
+        "quoter": [
+            "src/module/index.js"
+        ],
+        "deps": [
+            "src/commonJSX/Header.jsx.js",
+            "src/commonJSX/Footer.jsx.js"
         ]
     },
     "src/core/Model.js": {
         "quoter": [
             "src/module/adManage/Model.js",
             "src/module/appManage/Model.js",
-            "src/module/addNormalTargeting/Model.js"
+            "src/module/addNormalTargeting/Model.js",
+            "src/module/noApp/Model.js"
         ],
         "deps": []
+    },
+    "src/service/appAdsService/getAppAdsList.js": {
+        "quoter": [
+            "src/module/adManage/Model.js"
+        ],
+        "deps": [
+            "src/core/ajax.js"
+        ]
+    },
+    "src/service/appAdsService/getAppBindList.js": {
+        "quoter": [
+            "src/module/adManage/Model.js"
+        ],
+        "deps": [
+            "src/core/ajax.js"
+        ]
     },
     "src/module/adManage/config/mainConfig.js": {
         "quoter": [
             "src/module/adManage/Model.js",
-            "src/module/adManage/components/Navigator.jsx.js"
+            "src/module/adManage/components/Navigator.jsx.js",
+            "src/module/adManage/components/MaterialList.jsx.js",
+            "src/module/adManage/config/normalTargetingMaterialFieldsConfig.js"
         ],
         "deps": []
     },
@@ -441,7 +574,8 @@ define(function (require) {
         "quoter": [
             "src/module/adManage/Main.jsx.js",
             "src/module/appManage/App.jsx.js",
-            "src/module/addNormalTargeting/App.jsx.js"
+            "src/module/addNormalTargeting/App.jsx.js",
+            "src/module/noApp/App.jsx.js"
         ],
         "deps": [
             "src/core/util.js"
@@ -451,7 +585,8 @@ define(function (require) {
         "quoter": [
             "src/module/adManage/Main.jsx.js",
             "src/module/appManage/App.jsx.js",
-            "src/module/addNormalTargeting/App.jsx.js"
+            "src/module/addNormalTargeting/App.jsx.js",
+            "src/module/noApp/App.jsx.js"
         ],
         "deps": []
     },
@@ -482,14 +617,6 @@ define(function (require) {
             "src/core/ajax.js"
         ]
     },
-    "src/service/isAccountBindApp.js": {
-        "quoter": [
-            "src/module/appManage/Model.js"
-        ],
-        "deps": [
-            "src/core/ajax.js"
-        ]
-    },
     "src/commonConfig/appStateDialogConfig.js": {
         "quoter": [
             "src/module/appManage/Model.js"
@@ -501,10 +628,43 @@ define(function (require) {
             "src/module/appManage/App.jsx.js"
         ],
         "deps": [
-            "src/module/appManage/components/renderer/SelectItemWithIcon.jsx.js"
+            "src/module/appManage/components/renderer/SelectItemWithIcon.jsx.js",
+            "src/module/appManage/config/mainConfig.js"
         ]
     },
     "src/service/getAppInfo.js": {
+        "quoter": [
+            "src/module/addNormalTargeting/Model.js"
+        ],
+        "deps": [
+            "src/core/ajax.js"
+        ]
+    },
+    "src/service/getPlanList.js": {
+        "quoter": [
+            "src/module/addNormalTargeting/Model.js"
+        ],
+        "deps": [
+            "src/core/ajax.js"
+        ]
+    },
+    "src/service/getUnitsList.js": {
+        "quoter": [
+            "src/module/addNormalTargeting/Model.js"
+        ],
+        "deps": [
+            "src/core/ajax.js"
+        ]
+    },
+    "src/service/getPlanStatus.js": {
+        "quoter": [
+            "src/module/addNormalTargeting/Model.js"
+        ],
+        "deps": [
+            "src/core/ajax.js"
+        ]
+    },
+    "src/service/getUnitsStatus.js": {
         "quoter": [
             "src/module/addNormalTargeting/Model.js"
         ],
@@ -524,15 +684,15 @@ define(function (require) {
         "quoter": [
             "src/module/addNormalTargeting/App.jsx.js"
         ],
-        "deps": []
+        "deps": [
+            "src/module/addNormalTargeting/components/UnitTree.jsx.js"
+        ]
     },
-    "src/module/addNormalTargeting/components/AppOverPriceType.jsx.js": {
+    "src/module/addNormalTargeting/components/DynamicOverPriceType.jsx.js": {
         "quoter": [
             "src/module/addNormalTargeting/App.jsx.js"
         ],
-        "deps": [
-            "src/commonJSX/appNormalTargetingEditor/OverPriceType.jsx.js"
-        ]
+        "deps": []
     },
     "src/commonJSX/OperationBar.jsx.js": {
         "quoter": [
@@ -545,6 +705,7 @@ define(function (require) {
             "src/module/adManage/factory/normalTargetingHomepage.jsx.js"
         ],
         "deps": [
+            "src/module/adManage/config/mainConfig.js",
             "src/module/adManage/config/normalTargetingMaterialLayerConfig.js"
         ]
     },
@@ -552,18 +713,28 @@ define(function (require) {
         "quoter": [
             "src/module/adManage/factory/normalTargetingHomepage.jsx.js"
         ],
-        "deps": []
+        "deps": [
+            "src/core/util.js"
+        ]
     },
     "src/module/adManage/config/normalTargetingMaterialFieldsConfig.js": {
         "quoter": [
             "src/module/adManage/factory/normalTargetingHomepage.jsx.js"
         ],
         "deps": [
+            "src/module/adManage/config/mainConfig.js",
             "src/commonJSX/renderer/TableFilterHeader.jsx.js",
+            "src/commonJSX/renderer/TableLinkRenderer.jsx.js",
             "src/module/adManage/components/renderer/AppVersionRenderer.jsx.js"
         ]
     },
     "src/module/appManage/components/renderer/SelectItemWithIcon.jsx.js": {
+        "quoter": [
+            "src/module/appManage/components/AppCard.jsx.js"
+        ],
+        "deps": []
+    },
+    "src/module/appManage/config/mainConfig.js": {
         "quoter": [
             "src/module/appManage/components/AppCard.jsx.js"
         ],
@@ -577,16 +748,15 @@ define(function (require) {
             "src/module/addNormalTargeting/components/renderer/AppIconRenderer.jsx.js",
             "src/module/addNormalTargeting/components/renderer/ItemAlignLeftRenderer.jsx.js",
             "src/module/addNormalTargeting/components/renderer/AppVersionRenderer.jsx.js",
-            "src/module/addNormalTargeting/components/renderer/ItemBigDataRenderer.jsx.js"
+            "src/module/addNormalTargeting/components/renderer/ItemBigDataRenderer.jsx.js",
+            "src/module/addNormalTargeting/config/mainConfig.js"
         ]
     },
-    "src/commonJSX/appNormalTargetingEditor/OverPriceType.jsx.js": {
+    "src/module/addNormalTargeting/components/UnitTree.jsx.js": {
         "quoter": [
-            "src/module/addNormalTargeting/components/AppOverPriceType.jsx.js"
+            "src/module/addNormalTargeting/components/AppBindLayer.jsx.js"
         ],
-        "deps": [
-            "src/commonJSX/appNormalTargetingEditor/StaticOverPriceType.jsx.js"
-        ]
+        "deps": []
     },
     "src/module/adManage/config/normalTargetingMaterialLayerConfig.js": {
         "quoter": [
@@ -599,6 +769,12 @@ define(function (require) {
         ]
     },
     "src/commonJSX/renderer/TableFilterHeader.jsx.js": {
+        "quoter": [
+            "src/module/adManage/config/normalTargetingMaterialFieldsConfig.js"
+        ],
+        "deps": []
+    },
+    "src/commonJSX/renderer/TableLinkRenderer.jsx.js": {
         "quoter": [
             "src/module/adManage/config/normalTargetingMaterialFieldsConfig.js"
         ],
@@ -632,11 +808,13 @@ define(function (require) {
         "quoter": [
             "src/module/addNormalTargeting/config/appInfoTableConfig.js"
         ],
-        "deps": []
+        "deps": [
+            "src/commonJSX/MassWordShow.jsx.js"
+        ]
     },
-    "src/commonJSX/appNormalTargetingEditor/StaticOverPriceType.jsx.js": {
+    "src/module/addNormalTargeting/config/mainConfig.js": {
         "quoter": [
-            "src/commonJSX/appNormalTargetingEditor/OverPriceType.jsx.js"
+            "src/module/addNormalTargeting/config/appInfoTableConfig.js"
         ],
         "deps": []
     },
@@ -649,6 +827,12 @@ define(function (require) {
     "src/commonJSX/layer/CheckBoxList.jsx.js": {
         "quoter": [
             "src/module/adManage/config/normalTargetingMaterialLayerConfig.js"
+        ],
+        "deps": []
+    },
+    "src/commonJSX/MassWordShow.jsx.js": {
+        "quoter": [
+            "src/module/addNormalTargeting/components/renderer/ItemBigDataRenderer.jsx.js"
         ],
         "deps": []
     }

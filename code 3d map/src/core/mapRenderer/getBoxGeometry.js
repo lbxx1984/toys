@@ -62,6 +62,11 @@ define(function (require) {
         mesh.material.map.needsUpdate = true;
         mesh.material.needsUpdate = true;
         mesh.position.copy(param.pos);
+        mesh.tc = {
+            path: param.path,
+            type: param.type,
+            childVisible: true
+        };
         return mesh;
     };
 

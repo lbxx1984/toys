@@ -25,6 +25,7 @@ define(function (require) {
 
         // /////////////////////生成所有节点
         let reading = ['src'];
+        let meshes = [];
         while(reading.length) {
             // 创建节点
             const folder = reading.shift();
@@ -34,6 +35,7 @@ define(function (require) {
                 type: 'folder'
             });
             mesh && scene.add(mesh);
+            mesh && meshes.push(mesh);
             // 遍历孩子，如果是文件，生成节点，如果是目录，压栈
             if (!fileTreeConfig[folder]) continue;
             const children = fileTreeConfig[folder];
@@ -55,10 +57,14 @@ define(function (require) {
                     type: 'file'
                 });
                 mesh && scene.add(mesh);
+                mesh && meshes.push(mesh);
             });
         }
 
+        me.meshes = meshes;
+
         // /////////////////////生成依赖关系曲线
+        return;
         Object.keys(fileMapConfig).map(function (beginPath) {
             if (!fileMapConfig[beginPath].deps.length || !nodeLocations[beginPath]) return;
             fileMapConfig[beginPath].deps.map(function (endPath) {
