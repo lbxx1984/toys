@@ -6,7 +6,7 @@ define(function (require) {
 
 
     const THREE = require('three');
-    const FLOOR_DISTANCE = 800;
+    const FLOOR_DISTANCE = 1000;
 
 
     return function (dataset) {
