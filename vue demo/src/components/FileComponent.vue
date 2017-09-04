@@ -4,13 +4,19 @@
         <div>Local Component Message:{{msg}}</div>
         <div>Father Bind Message:{{parentMessage}}</div>
         <button @click="changeMessage">change both messages</button>
+        <h5>v-model example</h5>
+        {{customValue}} <button @click="customChangeHandler">emit change for v-model</button>
     </div>
 </template>
 
 <script>
 
     export default {
-        props: ['parentMessage'],
+        props: ['parentMessage', 'customValue'],
+        model: {
+            prop: 'customValue',
+            event: 'customChange'
+        },
         data() {
             return {
                 msg: 'it is single file component!'
@@ -21,6 +27,9 @@
                 const timer = +new Date();
                 this.msg = 'it is single file component, update time ' + timer;
                 this.$emit('childCallback', timer);
+            },
+            customChangeHandler() {
+                this.$emit('customChange', (this.customValue + '').split(',')[0] + ',' + (+new Date()));
             }
         }
     }

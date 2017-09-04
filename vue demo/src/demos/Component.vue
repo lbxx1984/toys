@@ -9,8 +9,14 @@
             @click.native="clickChild"
         ></local-component>
         <hr/>
-        <file-component :parentMessage="msg" @childCallback="childCallback" @click.native="clickChild">
-        </file-component>
+        <file-component
+            :parentMessage="msg"
+            @childCallback="childCallback"
+            @click.native="clickChild"
+            v-model="modelMsg"
+        ></file-component>
+        <hr/>
+        {{modelMsg}}
         <hr/>
         <div>{{clkmsg}}</div>
         <button @click="changeMessage">Change Father Component's Message</button>
@@ -54,6 +60,7 @@
         data() {
             return {
                 msg: 'it is father component!',
+                modelMsg: 'hello model',
                 clkmsg: ''
             }
         },
