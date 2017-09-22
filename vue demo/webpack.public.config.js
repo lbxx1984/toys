@@ -1,8 +1,12 @@
 
+
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 let demos = fs.readdirSync(path.resolve(__dirname, 'src/demos'));
 let fileContentHash = {};
@@ -16,17 +20,19 @@ fs.writeFileSync(
 
 
 module.exports = {
-    devtool: '#source-map',
     entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].js'
+        filename: 'js/[name].[hash].js'
     },
     module: {
         loaders: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: {
+                    extractCSS: true
+                }
             },
             {
                 test: /\.js$/,
@@ -43,11 +49,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve(__dirname, 'index.ejs'),
-        })
+        }),
+        new UglifyJSPlugin(),
+        new ExtractTextPlugin('css/style[hash].css')
     ],
     resolve: {
+        extensions: ['.js'],
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue$': 'vue/dist/vue.runtime'
         }
     }
 };

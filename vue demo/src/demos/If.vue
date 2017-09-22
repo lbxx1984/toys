@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="border-container">
         <h2>v-if</h2>
         <hr/>
         <h5 v-if="num > 0.6">{{num}} > 0.6</h5>
@@ -33,6 +33,8 @@
     }
 </script>
 
-<style lang="less">
-
+<style>
+    .border-container {
+        border: 1px solid;
+    }
 </style>
